@@ -1,10 +1,9 @@
 #include <Arduino.h>
-#include "../../CAN/include/app_can.h"
+#include "../lib/CAN/include/app_can.h"
 
 #define SERIAL_DEBUG
 #define ALLOWED_CAN_FAULTS 1000
 
-// This is an example main file. Do not use this in your code. Only used for testing purposes.
 struct example_timer_t
 {
   unsigned long ref = 0;
@@ -15,6 +14,8 @@ app_can_message_t tx_msg;
 
 int can_fault_counter;
 bool can_fault;
+
+int buffer_size = 40;
 
 void setup()
 {
@@ -48,15 +49,17 @@ void loop()
 
     if ((rx_msg_ptr->id != 0x0) && (can_fault == false))
     {
-      // #ifdef SERIAL_DEBUG
-      //       Serial.printf("ID: %X \t Len: %u \t Data: ", rx_msg_ptr->id, rx_msg_ptr->len);
-      //       for (int i = 0; i < rx_msg_ptr->len; i++)
-      //       {
-      //         Serial.printf("%X \t", rx_msg_ptr->data[i]);
-      //       }
-
-      //       Serial.println("");
-      // #endif
+      #ifdef SERIAL_DEBUG
+          char buffer[buffer_size];
+          sprintf(buffer, "ID: %X \t Len: %u \t Data: ", rx_msg_ptr->id, rx_msg_ptr->len);
+          Serial.println(buffer);
+          for (int i = 0; i < rx_msg_ptr->len; i++)
+          {
+            sprintf(buffer,"%X \t", rx_msg_ptr->data[i]);
+            Serial.println(buffer);
+          }
+          Serial.println("");
+      #endif
     }
   }
 
@@ -70,14 +73,17 @@ void loop()
 
     if ((rx_msg_ptr->id != 0x0) && (can_fault == false))
     {
-        // #ifdef SERIAL_DEBUG
-        //   Serial.printf("ID: %X \t Len: %u \t Data: ", rx_msg_ptr->id, rx_msg_ptr->len);
-        //   for (int i = 0; i < rx_msg_ptr->len; i++)
-        //   {
-        //     Serial.printf("%X \t", rx_msg_ptr->data[i]);
-        //   }
-        //   Serial.println("");
-        // #endif
+        #ifdef SERIAL_DEBUG
+          char buffer[buffer_size];
+          sprintf(buffer, "ID: %X \t Len: %u \t Data: ", rx_msg_ptr->id, rx_msg_ptr->len);
+          Serial.println(buffer);
+          for (int i = 0; i < rx_msg_ptr->len; i++)
+          {
+            sprintf(buffer,"%X \t", rx_msg_ptr->data[i]);
+            Serial.println(buffer);
+          }
+          Serial.println("");
+        #endif
     }
   }
 }
