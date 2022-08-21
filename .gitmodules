@@ -1,9 +1,3 @@
-[submodule "CAN"]
-	path = CAN
-	url = https://github.com/NU-Formula-Racing/CAN.git
-[submodule "main/CAN"]
-	path = main/CAN
-	url = https://github.com/NU-Formula-Racing/CAN.git
-[submodule "main/lib/CAN"]
-	path = main/lib/CAN
+[submodule "lib/CAN"]
+	path = lib/CAN
 	url = https://github.com/NU-Formula-Racing/CAN.git
